@@ -1,4 +1,4 @@
-# Copyright (C) 2014 The CyanogenMod Project
+#Copyright 2014 - The MoKee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,17 +26,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/cancro/cancro.mk)
 
 # Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+$(call inherit-product, vendor/slim/config/nfc_enhanced.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common MK stuff.
+$(call inherit-product, vendor/slim/config/common_full_phone.mk)
 
 # Build fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_FINGERPRINT=Xiaomi/cancro/cancro:4.4.2/KVT49L/KXDMIBE16.0:user/release-keys PRIVATE_BUILD_DESC="cancro-user 4.4.2 KVT49L KXDMIBE16.0 release-keys"
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := cancro
-PRODUCT_NAME := cm_cancro
+PRODUCT_NAME := slim_cancro
 PRODUCT_BRAND := xiaomi
 PRODUCT_MODEL := MI 3W
 PRODUCT_MANUFACTURER := xiaomi
