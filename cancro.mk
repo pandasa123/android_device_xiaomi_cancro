@@ -94,6 +94,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
+# SoftAP
+PRODUCT_PACKAGES += \
+    wcnss_service
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
@@ -141,16 +145,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/android_model_facea.dat:system/etc/android_model_facea.dat \
     $(LOCAL_PATH)/rootdir/system/etc/android_model_faceg.dat:system/etc/android_model_faceg.dat \
-    $(LOCAL_PATH)/rootdir/system/etc/hcidump.sh:system/etc/hcidump.sh \
     $(LOCAL_PATH)/rootdir/system/etc/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
-    $(LOCAL_PATH)/rootdir/system/etc/init.crda.sh:system/etc/init.crda.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    $(LOCAL_PATH)/rootdir/system/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/rootdir/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/rootdir/system/etc/qca6234-service.sh:system/etc/qca6234-service.sh \
     $(LOCAL_PATH)/rootdir/system/etc/sdm_200_HOG3x3_Grid3x3_bin5_noproj_zero_reduced.bin:system/etc/sdm_200_HOG3x3_Grid3x3_bin5_noproj_zero_reduced.bin \
@@ -261,11 +260,21 @@ PRODUCT_PACKAGES += \
     FM2 \
     FMRecord
 
+# Immersion Vibrator tools
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/immersion/immvibed:system/bin/immvibed \
+    $(LOCAL_PATH)/immersion/libImmVibeJ.so:system/lib/libImmVibeJ.so \
+    $(LOCAL_PATH)/immersion/libpparam.so:system/lib/libpparam.so
+
 #Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bt.dev_power_class=1
 
 PRODUCT_CHARACTERISTICS := nosdcard
+
+# Set default USB interface
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -299,6 +308,13 @@ PRODUCT_COPY_FILES += \
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+## Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := cancro
+PRODUCT_NAME := cancro
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := MI 3W
+PRODUCT_MANUFACTURER := Xiaomi
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
